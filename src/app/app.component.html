@@ -1,0 +1,24 @@
+<div></div>
+<div>
+  {{ insult }}
+</div>
+{{ luser | ucwords }}
+<div [formGroup]="user">
+  <input type="text" name="user" formControlName="user" />
+  <button type="submit" (click)="newLuser()" [disabled]="!user.valid">submit</button>
+</div>
+<div id="disclaimer">
+  This site is provided for someones, maybe yours, amusement only. I don't care who you are, but
+  this site was not made for you. If you don't like the decade old insults here, feel free to email
+  me updated insults. Don't waste your money and mine trying to sue me. I will not do anything to
+  prevent any specific name to be blocked from being used on this site. If you feel you just HAVE to
+  complain to someone, you may email me: After removing spaces and replacing appropriate characters:
+  t h e t i g u r at g m a i l. com This block of text added due to a very nice Canadian, who
+  decided to call me, and after my not complying with his wishes, has threatened a court order. This
+  is a joke site, just like many other fancy wildcard DNS sites out there. If you don't want it to
+  exist, DON'T visit!
+</div>
+<div id="courtOrder">
+  Looking for a Halden Zimmerman? See
+  <a href="/assets/pdfs/CourtOrderHaldenZimmerman.pdf" target="_self" download>here</a>
+</div>
