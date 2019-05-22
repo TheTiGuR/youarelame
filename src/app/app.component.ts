@@ -50,8 +50,8 @@ export class AppComponent implements OnInit {
 
   private lusername(): string {
     let host = window.location.hostname;
-    host = 'chris.simiskey';
-    let luser = host.replace('localhost', '').replace('.', ' ');
+    // host = 'chris.simiskey';
+    let luser = host.replace('stackblitz.io', '').replace('.', ' ');
     if (this.notLusers.indexOf(luser) > -1) {
       luser = 'They are not lame';
     }
