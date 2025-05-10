@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 export class AppComponent implements OnInit {
   insults: string[];
   notLusers: string[];
-  insult: string;
-  priorInsult: string;
-  subscription: Subscription;
-  luser: string;
+  insult: string = '';
+  priorInsult: string = '';
+  subscription: Subscription = new Subscription();
+  luser: string = '';
   timerLength: number = 1000;
   user = this.fb.group({ user: ['', Validators.required] });
 
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
     this.insults = this.buildInsults();
     this.notLusers = this.awesomePeople();
   }
+  
   ngOnInit() {
     this.redirector();
     this.getInsult();
@@ -35,15 +36,21 @@ export class AppComponent implements OnInit {
   }
 
   newLuser() {
-    this.luser = this.user.get('user').value;
-    localStorage.setItem('luser', this.luser);
+    const userValue = this.user.get('user')?.value;
+    if (userValue) {
+      this.luser = userValue;
+      localStorage.setItem('luser', this.luser);
+    }
   }
 
   private redirector() {
     if (window.location.hostname !== 'localhos') {
       localStorage.setItem('luser', this.lusername());
     } else if (localStorage.getItem('luser') !== null) {
-      this.luser = localStorage.getItem('luser');
+      const storedLuser = localStorage.getItem('luser');
+      if (storedLuser) {
+        this.luser = storedLuser;
+      }
     }
     console.log('Localstorage: ' + localStorage.getItem('luser'));
   }
